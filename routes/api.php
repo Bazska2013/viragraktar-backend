@@ -7,8 +7,4 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/hi', function () {
-    return response()->json(['message' => 'Hello World!']);
-});
-
 Route::get('/items', 'App\Http\Controllers\ItemController@index');
