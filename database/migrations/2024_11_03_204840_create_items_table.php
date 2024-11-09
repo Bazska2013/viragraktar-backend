@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->string('image');
             $table->timestamps();
+            $table->foreignId('store_id')->constrained();
         });
     }
 

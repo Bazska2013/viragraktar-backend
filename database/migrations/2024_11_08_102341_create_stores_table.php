@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('opening_hours');
             $table->boolean('calculation_enabled')->default(false);
             $table->timestamps();

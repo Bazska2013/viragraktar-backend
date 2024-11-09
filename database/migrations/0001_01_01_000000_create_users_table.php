@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->foreignId('store_id')->nullable()->constrained('stores')->onDelete('cascade');
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_seller')->default(false);
+            $table->boolean('is_buyer')->default(false);
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
