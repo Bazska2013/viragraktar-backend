@@ -11,4 +11,8 @@ Route::middleware(['auth:sanctum'])->post('/new/store', 'App\Http\Controllers\St
     ->middleware('auth')
     ->name('new.store');
 
+Route::middleware(['auth:sanctum'])->get('/store', 'App\Http\Controllers\StoreController@index')
+    ->middleware('auth')
+    ->name('store');
+
 Route::get('/items', 'App\Http\Controllers\ItemController@index');
