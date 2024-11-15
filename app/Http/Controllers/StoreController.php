@@ -66,4 +66,12 @@ class StoreController extends Controller
 
         return response()->json($store, 200);
     }
+
+    public function id(): \Illuminate\Http\JsonResponse
+    {
+        $user = Auth::user();
+        $store = $user->store;
+
+        return response()->json($store->unique_id, 200);
+    }
 }
