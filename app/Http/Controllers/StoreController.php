@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -73,5 +74,25 @@ class StoreController extends Controller
         $store = $user->store;
 
         return response()->json($store->unique_id, 200);
+    }
+
+    public function users(): \Illuminate\Http\JsonResponse
+    {
+        $store = Auth::user()->store;
+        $users = $store->users;
+
+        return response()->json($users, 200);
+    }
+
+    public function removeUser(User $user): \Illuminate\Http\JsonResponse
+    {
+        $store = Auth::user()->store;
+
+        if ($user->store_id === $store->id) {
+            $user->store_id = null;
+            $user->save();
+        }
+
+        return response()->json(null, 204);
     }
 }

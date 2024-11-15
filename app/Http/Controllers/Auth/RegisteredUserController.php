@@ -38,4 +38,17 @@ class RegisteredUserController extends Controller
 
         return response()->noContent();
     }
+
+    public function updatePrivileges(Request $request, User $user): Response
+    {
+        $request->validate([
+            'is_admin' => ['required', 'boolean'],
+            'is_seller' => ['required', 'boolean'],
+            'is_buyer' => ['required', 'boolean'],
+        ]);
+
+        $user->update($request->only('is_admin', 'is_seller', 'is_buyer'));
+
+        return response()->noContent();
+    }
 }

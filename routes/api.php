@@ -23,4 +23,12 @@ Route::middleware(['auth:sanctum'])->get('/store/id', 'App\Http\Controllers\Stor
     ->middleware('auth')
     ->name('store.id');
 
+Route::middleware(['auth:sanctum'])->get('/store/users', 'App\Http\Controllers\StoreController@users')
+    ->middleware('auth')
+    ->name('store.users');
+
+Route::middleware(['auth:sanctum'])->post('/store/users/remove/{user}', 'App\Http\Controllers\StoreController@removeUser')
+    ->middleware('auth')
+    ->name('store.users.remove');
+
 Route::get('/items', 'App\Http\Controllers\ItemController@index');

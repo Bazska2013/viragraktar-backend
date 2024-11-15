@@ -35,3 +35,7 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+Route::post('/update-privileges/{user}', [RegisteredUserController::class, 'updatePrivileges'])
+    ->middleware('auth')
+    ->name('update.privileges');
