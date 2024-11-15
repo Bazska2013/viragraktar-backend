@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class StoreController extends Controller
 {
@@ -19,6 +20,12 @@ class StoreController extends Controller
         ]);
 
         try {
+            do {
+                $uniqueId = strtoupper(Str::random(6));
+            } while (Store::where('unique_id', $uniqueId)->exists());
+
+            $validatedData['unique_id'] = $uniqueId;
+
             $store = Store::create($validatedData);
 
             $user = Auth::user();
@@ -37,6 +44,25 @@ class StoreController extends Controller
     {
         $user = Auth::user();
         $store = $user->store;
+
+        return response()->json($store, 200);
+    }
+
+    public function join(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $validatedData = $request->validate([
+            'unique_id' => ['required', 'string', 'max:6'],
+        ]);
+
+        $store = Store::where('unique_id', $validatedData['unique_id'])->first();
+
+        if (!$store) {
+            return response()->json(['error' => 'Store not found.'], 404);
+        }
+
+        $user = Auth::user();
+        $user->store()->associate($store);
+        $user->save();
 
         return response()->json($store, 200);
     }

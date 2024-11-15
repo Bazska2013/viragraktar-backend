@@ -15,4 +15,8 @@ Route::middleware(['auth:sanctum'])->get('/store', 'App\Http\Controllers\StoreCo
     ->middleware('auth')
     ->name('store');
 
+Route::middleware(['auth:sanctum'])->post('/join', 'App\Http\Controllers\StoreController@join')
+    ->middleware('auth')
+    ->name('join');
+
 Route::get('/items', 'App\Http\Controllers\ItemController@index');

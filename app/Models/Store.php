@@ -11,6 +11,7 @@ class Store extends Model
         'name',
         'opening_hours',
         'calculation_enabled',
+        'unique_id',
     ];
     public function items() : HasMany
     {
