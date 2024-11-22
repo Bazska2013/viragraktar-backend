@@ -11,6 +11,10 @@ Route::middleware(['auth:sanctum'])->post('/new/store', 'App\Http\Controllers\St
     ->middleware('auth')
     ->name('new.store');
 
+Route::middleware(['auth:sanctum'])->post('/new/item', 'App\Http\Controllers\ItemController@store')
+    ->middleware('auth')
+    ->name('new.item');
+
 Route::middleware(['auth:sanctum'])->get('/store', 'App\Http\Controllers\StoreController@index')
     ->middleware('auth')
     ->name('store');
@@ -30,5 +34,9 @@ Route::middleware(['auth:sanctum'])->get('/store/users', 'App\Http\Controllers\S
 Route::middleware(['auth:sanctum'])->post('/store/users/remove/{user}', 'App\Http\Controllers\StoreController@removeUser')
     ->middleware('auth')
     ->name('store.users.remove');
+
+Route::middleware(['auth:sanctum'])->get('/items', 'App\Http\Controllers\ItemController@index')
+    ->middleware('auth')
+    ->name('items');
 
 Route::get('/items', 'App\Http\Controllers\ItemController@index');
