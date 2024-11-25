@@ -39,4 +39,14 @@ Route::middleware(['auth:sanctum'])->get('/items', 'App\Http\Controllers\ItemCon
     ->middleware('auth')
     ->name('items');
 
-Route::get('/items', 'App\Http\Controllers\ItemController@index');
+Route::middleware(['auth:sanctum'])->get('/item/{item}', 'App\Http\Controllers\ItemController@show')
+    ->middleware('auth')
+    ->name('item');
+
+Route::middleware(['auth:sanctum'])->put('/item/{item}', 'App\Http\Controllers\ItemController@update')
+    ->middleware('auth')
+    ->name('item.update');
+
+Route::middleware(['auth:sanctum'])->delete('/item/{item}', 'App\Http\Controllers\ItemController@destroy')
+    ->middleware('auth')
+    ->name('item.delete');

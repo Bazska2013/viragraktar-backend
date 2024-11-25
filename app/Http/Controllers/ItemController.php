@@ -32,4 +32,37 @@ class ItemController extends Controller
 
         return response()->json($item, 201);
     }
+
+    public function show(int $item_id): \Illuminate\Http\JsonResponse
+    {
+        $store = Auth::user()->store;
+        $item = $store->items->find($item_id);
+        return response()->json($item);
+    }
+
+    public function update(Request $request, Item $item): \Illuminate\Http\JsonResponse
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string'],
+            'price' => ['required', 'numeric'],
+            'stock' => ['required', 'integer'],
+//            'image' => ['required', 'string'],
+        ]);
+
+        $store = Auth::user()->store;
+        $item = $store->items->find($item);
+        $item->update($validatedData);
+
+        return response()->json($item, 200);
+    }
+
+    public function destroy(Item $item): \Illuminate\Http\JsonResponse
+    {
+        $store = Auth::user()->store;
+        $item = $store->items->find($item);
+        $item->delete();
+
+        return response()->json(null, 204);
+    }
 }
