@@ -50,3 +50,19 @@ Route::middleware(['auth:sanctum'])->put('/item/{item}', 'App\Http\Controllers\I
 Route::middleware(['auth:sanctum'])->delete('/item/{item}', 'App\Http\Controllers\ItemController@destroy')
     ->middleware('auth')
     ->name('item.delete');
+
+Route::middleware(['auth:sanctum'])->get('/user/transactions', 'App\Http\Controllers\TransactionController@user_index')
+    ->middleware('auth')
+    ->name('user.transactions');
+
+Route::middleware(['auth:sanctum'])->get('/store/transactions', 'App\Http\Controllers\TransactionController@store_index')
+    ->middleware('auth')
+    ->name('store.transactions');
+
+Route::middleware(['auth:sanctum'])->post('/new/transaction', 'App\Http\Controllers\TransactionController@store')
+    ->middleware('auth')
+    ->name('new.transaction');
+
+Route::middleware(['auth:sanctum'])->get('/transaction/{transaction}', 'App\Http\Controllers\TransactionController@show')
+    ->middleware('auth')
+    ->name('transaction');
