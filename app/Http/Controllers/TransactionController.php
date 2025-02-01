@@ -50,4 +50,18 @@ class TransactionController extends Controller
         $transaction = $store->transactions->find($transaction_id);
         return response()->json($transaction);
     }
+
+    public function todayProfit() : \Illuminate\Http\JsonResponse
+    {
+        $store = Auth::user()->store;
+        $transactions = $store->transactions;
+        $today = now()->startOfDay();
+        $profit = 0;
+        foreach ($transactions as $transaction) {
+            if ($transaction->created_at >= $today) {
+                $profit += $transaction->total;
+            }
+        }
+        return response()->json($profit, 200);
+    }
 }

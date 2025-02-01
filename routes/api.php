@@ -66,3 +66,7 @@ Route::middleware(['auth:sanctum'])->post('/new/transaction', 'App\Http\Controll
 Route::middleware(['auth:sanctum'])->get('/transaction/{transaction}', 'App\Http\Controllers\TransactionController@show')
     ->middleware('auth')
     ->name('transaction');
+
+Route::middleware(['auth:sanctum'])->get('/store/profit/today', 'App\Http\Controllers\TransactionController@todayProfit')
+    ->middleware('auth')
+    ->name('store.profit.today');
