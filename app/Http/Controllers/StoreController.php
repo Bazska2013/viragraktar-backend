@@ -95,4 +95,18 @@ class StoreController extends Controller
 
         return response()->json(null, 204);
     }
+
+    public function update(Request $request): \Illuminate\Http\JsonResponse
+    {
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'opening_hours' => ['required', 'string'],
+            'calculation_enabled' => ['required', 'boolean'],
+        ]);
+
+        $store = Auth::user()->store;
+        $store->update($validatedData);
+
+        return response()->json($store, 200);
+    }
 }

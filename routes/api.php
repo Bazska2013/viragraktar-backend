@@ -7,11 +7,11 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['auth:sanctum'])->post('/new/store', 'App\Http\Controllers\StoreController@store')
+Route::middleware(['auth:sanctum'])->post('/store', 'App\Http\Controllers\StoreController@store')
     ->middleware('auth')
     ->name('new.store');
 
-Route::middleware(['auth:sanctum'])->post('/new/item', 'App\Http\Controllers\ItemController@store')
+Route::middleware(['auth:sanctum'])->post('/item', 'App\Http\Controllers\ItemController@store')
     ->middleware('auth')
     ->name('new.item');
 
@@ -22,6 +22,10 @@ Route::middleware(['auth:sanctum'])->get('/store', 'App\Http\Controllers\StoreCo
 Route::middleware(['auth:sanctum'])->post('/join', 'App\Http\Controllers\StoreController@join')
     ->middleware('auth')
     ->name('join');
+
+Route::middleware(['auth:sanctum'])->put('/store', 'App\Http\Controllers\StoreController@update')
+    ->middleware('auth')
+    ->name('store.update');
 
 Route::middleware(['auth:sanctum'])->get('/store/id', 'App\Http\Controllers\StoreController@id')
     ->middleware('auth')
