@@ -39,3 +39,11 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 Route::post('/update-privileges/{user}', [RegisteredUserController::class, 'updatePrivileges'])
     ->middleware('auth')
     ->name('update.privileges');
+
+Route::post('/change-password', [RegisteredUserController::class, 'changePassword'])
+    ->middleware('auth')
+    ->name('change.password');
+
+Route::post('/change-name', [RegisteredUserController::class, 'changeName'])
+    ->middleware('auth')
+    ->name('change.name');

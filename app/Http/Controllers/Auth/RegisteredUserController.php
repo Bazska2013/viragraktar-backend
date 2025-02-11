@@ -51,4 +51,40 @@ class RegisteredUserController extends Controller
 
         return response()->noContent();
     }
+
+    public function changePassword(Request $request) : \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'old_password' => ['required', 'string'],
+            'new_password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return response()->json([
+                'message' => 'The provided password does not match our records.',
+            ], 401);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return response()->json($user, 200);
+    }
+
+    public function changeName(Request $request) : \Illuminate\Http\JsonResponse
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $user = Auth::user();
+        $user->update([
+            'name' => $request->name,
+        ]);
+
+        return response()->json($user, 200);
+    }
 }
