@@ -13,7 +13,7 @@ class Item extends Model
         'price',
         'stock',
         'store_id',
-//        'image',
+        'image',
     ];
 
     public function store() : BelongsTo

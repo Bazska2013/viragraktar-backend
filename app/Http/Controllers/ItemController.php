@@ -22,11 +22,17 @@ class ItemController extends Controller
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'integer'],
-//            'image' => ['required', 'string'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
 
         $store = Auth::user()->store;
         $validatedData['store_id'] = $store->id; // Add the store_id to the validated data
+
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $validatedData['image'] = $imageName;
+        }
 
         $item = Item::create($validatedData);
 
@@ -47,11 +53,18 @@ class ItemController extends Controller
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'integer'],
-//            'image' => ['required', 'string'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
 
         $store = Auth::user()->store;
         $item = $store->items->find($item);
+
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            $validatedData['image'] = $imageName;
+        }
+
         $item->update($validatedData);
 
         return response()->json($item, 200);

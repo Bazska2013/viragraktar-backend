@@ -13,7 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withSchedule(function (Schedule $schedule) {
-        $schedule->command('app:reload-unique-id')->everyThirtySeconds();
+        $schedule->command('app:reload-unique-id')->everyMinute();
     })
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->statefulApi();

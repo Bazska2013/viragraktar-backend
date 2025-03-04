@@ -49,7 +49,7 @@ Route::middleware(['auth:sanctum'])->get('/item/{item}', 'App\Http\Controllers\I
     ->middleware('auth')
     ->name('item');
 
-Route::middleware(['auth:sanctum'])->put('/item/{item}', 'App\Http\Controllers\ItemController@update')
+Route::middleware(['auth:sanctum'])->post('/item/edit/{item}', 'App\Http\Controllers\ItemController@update')
     ->middleware('auth')
     ->name('item.update');
 
