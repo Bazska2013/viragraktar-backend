@@ -89,6 +89,9 @@ class StoreController extends Controller
 
         if ($user->store_id === $store->id) {
             $user->store_id = null;
+            $user->is_admin = false;
+            $user->is_seller = false;
+            $user->is_buyer = false;
             $user->save();
         }
 
@@ -98,9 +101,9 @@ class StoreController extends Controller
     public function update(Request $request): \Illuminate\Http\JsonResponse
     {
         $validatedData = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'opening_hours' => ['required', 'string'],
-            'calculation_enabled' => ['required', 'boolean'],
+            'name' => ['string', 'max:255'],
+            'opening_hours' => ['string'],
+            'calculation_enabled' => ['boolean'],
         ]);
 
         $store = Auth::user()->store;
