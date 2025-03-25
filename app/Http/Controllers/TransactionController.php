@@ -63,4 +63,21 @@ class TransactionController extends Controller
         }
         return response()->json($profit, 200);
     }
+
+    public function showTransactionsInDay(string $date) : \Illuminate\Http\JsonResponse
+    {
+        $store = Auth::user()->store;
+        $transactions = Transaction::where('store_id', $store->id)
+            ->whereDate('created_at', $date)
+            ->get();
+
+        return response()->json($transactions, 200);
+    }
+
+    public function showTransactionsInRange(string $start, string $end) : \Illuminate\Http\JsonResponse
+    {
+        $store = Auth::user()->store;
+        $transactions = $store->transactions->whereBetween('created_at', [$start, $end])->get();
+        return response()->json($transactions, 200);
+    }
 }
