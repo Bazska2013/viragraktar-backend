@@ -113,6 +113,6 @@ Route::middleware(['auth:sanctum'])->get('/transactions/{date}', 'App\Http\Contr
     ->middleware('auth')
     ->name('transactions.day');
 
-Route::middleware(['auth:sanctum'])->get('/transactions/{start}-{end}', 'App\Http\Controllers\TransactionController@showTransactionsInRange')
+Route::middleware(['auth:sanctum'])->get('/transactions/{start}/{end}', 'App\Http\Controllers\TransactionController@showTransactionsInRange')
     ->middleware('auth')
     ->name('transactions.range');
