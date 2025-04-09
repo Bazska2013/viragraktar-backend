@@ -25,12 +25,15 @@ class StoreController extends Controller
             } while (Store::where('unique_id', $uniqueId)->exists());
 
             $validatedData['unique_id'] = $uniqueId;
+            $validatedData['labels'] = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'gray', 'black', 'white', 'fall', 'spring', 'summer', 'winter', 'new', 'old', 'used', 'vintage', 'retro', 'modern', 'classic', 'trendy', 'stylish', 'elegant', 'casual', 'formal', 'business', 'sporty', 'athletic', 'outdoor', 'indoor'];
 
             $store = Store::create($validatedData);
 
             $user = Auth::user();
             $user->store()->associate($store);
             $user->is_admin = true;
+            $user->is_seller = true;
+            $user->is_buyer = true;
             $user->save();
 
             return response()->json($store, 201);
@@ -104,6 +107,7 @@ class StoreController extends Controller
             'name' => ['string', 'max:255'],
             'opening_hours' => ['string'],
             'calculation_enabled' => ['boolean'],
+            'labels' => ['string'],
         ]);
 
         $store = Auth::user()->store;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class ItemController extends Controller
 {
@@ -19,11 +20,17 @@ class ItemController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'description' => ['required'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'integer'],
             'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
+
+        $description = $request->input('description');
+        if (is_array($description)) {
+            $description = json_encode($description);
+        }
+        $validatedData['description'] = $description;
 
         $store = Auth::user()->store;
         $validatedData['store_id'] = $store->id; // Add the store_id to the validated data
@@ -50,11 +57,17 @@ class ItemController extends Controller
     {
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string'],
+            'description' => ['required'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'integer'],
             'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ]);
+
+        $description = $request->input('description');
+        if (is_array($description)) {
+            $description = json_encode($description);
+        }
+        $validatedData['description'] = $description;
 
         $store = Auth::user()->store;
         $item = $store->items->find($item);

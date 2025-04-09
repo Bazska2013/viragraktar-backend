@@ -16,9 +16,11 @@ class ItemFactory extends Factory
      */
     public function definition(): array
     {
+        $labels = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'gray', 'black', 'white', 'fall', 'spring', 'summer', 'winter', 'new', 'old', 'used', 'vintage', 'retro', 'modern', 'classic', 'trendy', 'stylish', 'elegant', 'casual', 'formal', 'business', 'sporty', 'athletic', 'outdoor', 'indoor'];
+        $selectedLabels = fake()->randomElements($labels, fake()->numberBetween(1, 5));
         return [
             'name' => fake()->word(),
-            'description' => fake()->sentence(),
+            'description' => '{"labels":' . json_encode($selectedLabels) . ',"connections":[]}',
             'price' => fake()->numberBetween(10, 99)*10,
             'stock' => fake()->numberBetween(1, 100),
         ];

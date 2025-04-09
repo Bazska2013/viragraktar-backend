@@ -23,6 +23,7 @@ class StoreFactory extends Factory
             'calculation_enabled' => fake()->boolean(),
             'unique_id' => strtoupper(Str::random(6)),
             'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
+            'labels' => ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'gray', 'black', 'white', 'fall', 'spring', 'summer', 'winter', 'new', 'old', 'used', 'vintage', 'retro', 'modern', 'classic', 'trendy', 'stylish', 'elegant', 'casual', 'formal', 'business', 'sporty', 'athletic', 'outdoor', 'indoor']
         ];
     }
 }

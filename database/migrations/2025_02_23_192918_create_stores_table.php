@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('opening_hours');
             $table->boolean('calculation_enabled')->default(false);
             $table->string('unique_id')->unique();
+            $table->string('labels')->nullable();
             $table->timestamps();
         });
     }
