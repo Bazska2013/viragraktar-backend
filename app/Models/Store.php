@@ -13,7 +13,7 @@ class Store extends Model
     protected $fillable = [
         'name',
         'opening_hours',
-        'calculation_enabled',
+        'currency',
         'unique_id',
         'labels',
     ];

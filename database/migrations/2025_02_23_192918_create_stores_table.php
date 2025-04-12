@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('opening_hours');
-            $table->boolean('calculation_enabled')->default(false);
+            $table->string('currency');
             $table->string('unique_id')->unique();
             $table->string('labels')->nullable();
             $table->timestamps();

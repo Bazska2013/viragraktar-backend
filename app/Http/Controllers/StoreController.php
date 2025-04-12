@@ -16,7 +16,7 @@ class StoreController extends Controller
         $validatedData = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'opening_hours' => ['required', 'string'],
-            'calculation_enabled' => ['required', 'boolean'],
+            'currency' => ['required', 'string'],
         ]);
 
         try {
@@ -25,7 +25,7 @@ class StoreController extends Controller
             } while (Store::where('unique_id', $uniqueId)->exists());
 
             $validatedData['unique_id'] = $uniqueId;
-            $validatedData['labels'] = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'gray', 'black', 'white', 'fall', 'spring', 'summer', 'winter', 'new', 'old', 'used', 'vintage', 'retro', 'modern', 'classic', 'trendy', 'stylish', 'elegant', 'casual', 'formal', 'business', 'sporty', 'athletic', 'outdoor', 'indoor'];
+            $validatedData['labels'] = json_encode(['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'pink', 'brown', 'gray', 'black', 'white', 'fall', 'spring', 'summer', 'winter', 'new', 'old', 'used', 'vintage', 'retro', 'modern', 'classic', 'trendy', 'stylish', 'elegant', 'casual', 'formal', 'business', 'sporty', 'athletic', 'outdoor', 'indoor']);
 
             $store = Store::create($validatedData);
 
@@ -106,7 +106,7 @@ class StoreController extends Controller
         $validatedData = $request->validate([
             'name' => ['string', 'max:255'],
             'opening_hours' => ['string'],
-            'calculation_enabled' => ['boolean'],
+            'currency' => ['required', 'string'],
             'labels' => ['string'],
         ]);
 
