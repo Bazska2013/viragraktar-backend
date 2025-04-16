@@ -106,7 +106,7 @@ class StoreController extends Controller
         $validatedData = $request->validate([
             'name' => ['string', 'max:255'],
             'opening_hours' => ['string'],
-            'currency' => ['required', 'string'],
+            'currency' => ['string'],
             'labels' => ['string'],
         ]);
 
