@@ -23,7 +23,7 @@ class ItemController extends Controller
             'description' => ['required'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'integer'],
-            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'],
         ]);
 
         $description = $request->input('description');
@@ -60,7 +60,7 @@ class ItemController extends Controller
             'description' => ['required'],
             'price' => ['required', 'numeric'],
             'stock' => ['required', 'integer'],
-            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'image' => ['image', 'mimes:jpeg,png,jpg,gif,svg,webp', 'max:2048'],
         ]);
 
         $description = $request->input('description');
