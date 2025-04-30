@@ -50,6 +50,11 @@ class ItemController extends Controller
     {
         $store = Auth::user()->store;
         $item = $store->items->find($item_id);
+
+        if (!$item) {
+            return response()->json(['error' => 'Item not found'], 404);
+        }
+
         return response()->json($item);
     }
 
